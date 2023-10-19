@@ -31,6 +31,9 @@ const mostrarMedicos = function () {
   if (localMedicos) {
     medicos = JSON.parse(localMedicos);
   }
+
+  cuerpoTabla.innerHTML = '';
+
   medicos.forEach((medico) => {
     let fila = document.createElement("tr");
     //Para crear celda DOM tiene un metodo que es insertCell()
@@ -52,6 +55,18 @@ const mostrarMedicos = function () {
     celdaEspecialidad.textContent = medico.especialidad;
     celdaPaciente.textContent = "Sin asignar";
 
+    const celdaEliminar = fila.insertCell();
+    const botonEliminar = document.createElement("button");
+    botonEliminar.textContent = "Eliminar";
+    botonEliminar.classList.add("eliminar-btn");
+
+    // Agrega un evento para el botón de eliminar
+    botonEliminar.addEventListener("click", function () {
+      eliminarPaciente(index); // Llama a una función para eliminar el paciente
+    });
+
+    celdaEliminar.appendChild(botonEliminar);
+
     cuerpoTabla.appendChild(fila);
   });
 };
@@ -63,7 +78,10 @@ const mostrarPacientes = function () {
   if (localPacientes) {
     pacientes = JSON.parse(localPacientes);
   }
-  pacientes.forEach((paciente) => {
+
+  cuerpoTabla.innerHTML = '';
+
+  pacientes.forEach((paciente, index) => {
     let fila = document.createElement("tr");
     //Para crear celda DOM tiene un metodo que es insertCell()
     let celdaNombres = fila.insertCell();
@@ -82,9 +100,39 @@ const mostrarPacientes = function () {
     celdaEspecialidad.textContent = paciente.especialidad;
     celdaMedico.textContent = "Sin asignar";
 
+    const celdaEliminar = fila.insertCell();
+    const botonEliminar = document.createElement("button");
+    botonEliminar.textContent = "Eliminar";
+    botonEliminar.classList.add("eliminar-btn");
+
+    // Agrega un evento para el botón de eliminar
+    botonEliminar.addEventListener("click", function () {
+      eliminarPaciente(index); // Llama a una función para eliminar el paciente
+    });
+
+    celdaEliminar.appendChild(botonEliminar);
+
     cuerpoTabla.appendChild(fila);
   });
 };
+
+function eliminarPaciente(index) {
+  let pacientes = [];
+  let localPacientes = localStorage.getItem("pacientes");
+
+  if (localPacientes) {
+    pacientes = JSON.parse(localPacientes);
+  }
+
+  // Elimina el paciente del array
+  pacientes.splice(index, 1);
+
+  // Actualiza el almacenamiento local
+  localStorage.setItem("pacientes", JSON.stringify(pacientes));
+
+  // Vuelve a mostrar la lista actualizada
+  mostrarPacientes();
+}
 
 //Unicamente ejecuta la funcion cuando estamos ubicados en listado-medicos.html
 if (window.location.href.endsWith("listado-medicos.html")) {

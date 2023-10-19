@@ -7,13 +7,14 @@ body {
     padding: 0;
 }
 
-header, footer {
+header,
+footer {
     background-color: #4CAF50;
     color: #fff;
     padding: 20px;
 }
 
-footer{
+footer {
     position: static;
     bottom: 0;
     width: 100%;
@@ -34,13 +35,13 @@ main {
     margin: auto;
 }
 
-li{
+li {
     list-style: none;
     display: inline-block;
     padding: 20px;
 }
 
-.container-form{
+.container-form {
     max-width: 50%;
     margin: auto;
 }
@@ -120,12 +121,15 @@ th {
 .listado-container {
     max-width: 70%;
 }
+
 .boton-container {
     margin-block: 30px;
 }
-a{
+
+a {
     text-decoration: none;
 }
+
 .listado-servicios a {
     color: #3e8e41;
     font-size: 20px;
